@@ -1,0 +1,97 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style>
+.trash { color:rgb(209, 91, 71); }
+.flag { color:rgb(248, 148, 6); }
+.panel-body { padding:0px; }
+.panel-footer .pagination { margin: 0; }
+.panel .glyphicon,.list-group-item .glyphicon { margin-right:5px; }
+.panel-body .radio, .checkbox { display:inline-block;margin:0px; }
+.panel-body input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
+.list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
+.list-group { margin-bottom:0px; }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-list"></span>Company Lists
+                    <div class="pull-right action-buttons">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-cog" style="margin-right: 0px;"></span>
+                            </button>
+                            <ul class="dropdown-menu slidedown">
+                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
+                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-trash"></span>Delete</a></li>
+                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-flag"></span>Flag</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+					 <li class="list-group-item">
+                            <div class="checkbox">
+                               
+                                <label for="checkbox">
+                                    Company Name
+                                </label>
+								<label for="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Name
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="checkbox">
+                                    Email
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+                            </div>
+                            <div class="pull-right action-buttons">
+							Action
+                              </div>
+                        </li>
+						  <% if(data.length>0) { %>
+						   <% for(var i=0; i<data.length;i++) { %>
+                        <li class="list-group-item">
+                            <div class="checkbox">
+                                
+								
+                  
+								
+								
+                                <label for="checkbox">
+                                 <%= data[i].company_name%> 
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="checkbox">
+                                    <%= data[i].first_name%> <%= data[i].last_name%>
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="checkbox">
+                                   <%= data[i].email%>
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+                            </div>
+                            <div class="pull-right action-buttons">
+							<% if(data[i].status == 2){ %>
+							     <a href="http://127.0.0.1:3000/make_active/?cid=<%= data[i].unique_id%>">Activate</a>
+								 <% } %>  
+								 <% if(data[i].status == 1){ %>
+								  <a href="http://127.0.0.1:3000/make_deactive/?cid=<%= data[i].unique_id%>">DeActivate</a>
+                                 <% } %>  
+								<a href="http://127.0.0.1:3000/edit_info/?cid=<%= data[i].unique_id%>"><span class="glyphicon glyphicon-pencil"></span></a>
+                               
+                              
+                            </div>
+                        </li>
+						 <% } }else { %>
+                         <li class="list-group-item">No company found.</li>
+                         <% } %>
+                    
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

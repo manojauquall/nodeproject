@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Company Registration Form</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="http://127.0.0.1:3000/css/main.css">
+ <script>
+  $( function() {
+    $( "#datepickers" ).datepicker();
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form1" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/',
+					data: $('#form1').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form1')[0].reset();
+                            if (response.Success == 200) {
+         						alert("Company created Successful.");
+								
+         					}if (response.Success == 300) {
+         						alert("Company Name already exist.");
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+		});
+	</script>
+</head>
+<body>
+
+	<div class="col-md-4 col-md-offset-4">
+		<div>
+			<p>Company Registration Form
+			</p>
+		</div>
+		<div class="form-group">
+			<form id="form1" method="post">
+				<input type="text" name="first_name" placeholder="First Name" required="" class="form-control"><br/>
+				<input type="text" name="last_name" placeholder="Last Name" required="" class="form-control"><br/>
+				<input type="text" name="email" placeholder="Email" required="" class="form-control"><br/>
+				<input type="text" name="company_name" placeholder="Company Name" required="" class="form-control"><br/>
+				<input type="text" name="lstart" id="datepickers" placeholder="Company license start date" required="" class="form-control"><br/>
+				<input type="text" name="lend" id="datepicker" placeholder="Company license end date." required="" class="form-control"><br/>
+				<input type="submit" value="Submit" class="btn btn-success">
+			</form>
+		</div>
+		
+		
+	</div>
+</body>
+</html>

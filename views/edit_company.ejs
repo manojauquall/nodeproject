@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Company Detail</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="./main.css">
+ <script>
+  $( function() {
+    $( "#datepickers" ).datepicker();
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form2" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/update_company',
+					data: $('#form2').serialize(),
+					dataType: "json",
+					success: function(response){
+						
+         					if (response.Success == 200) {
+         						window.location.href = "http://127.0.0.1:3000/companylist";
+         					}if (response.Success == 300) {
+         						alert("Company Name already exist.");
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+		});
+	</script>
+</head>
+<body>
+
+	<div class="col-md-4 col-md-offset-4">
+		<div>
+			<p>Edit Company Detail</p>
+		</div>
+		<div class="form-group">
+			<form id="form2" method="post">
+			<input type="hidden" name="unique_id" placeholder="First Name" required="" value="<%= unique_id %>" class="form-control"><br/>
+				<input type="text" name="first_name" placeholder="First Name" required="" value="<%= first_name %>" class="form-control"><br/>
+				<input type="text" name="last_name" placeholder="Last Name" required="" value="<%= last_name %>" class="form-control"><br/>
+				<input type="text" name="email" placeholder="Email" required="" value="<%= email %>" class="form-control"><br/>
+				<input type="text" name="company_name" placeholder="Company Name" required="" value="<%= company_name %>" class="form-control"><br/>
+				<input type="text" name="lstart" id="datepickers" placeholder="Company license start date" value="<%= lstart %>" required="" class="form-control"><br/>
+				<input type="text" name="lend" id="datepicker" placeholder="Company license end date." value="<%= lend %>" required="" class="form-control"><br/>
+				<input type="submit" value="Update" class="btn btn-success">
+			</form>
+		</div>
+		
+		
+		
+	</div>
+	<style>
+	/*body,
+ table,
+    thead,
+    tr,
+    tbody,
+    th,
+    td {
+        text-align: center;
+    }*/
+body{
+	text-align: center !important;
+}
+p{
+	margin-top: 20px;
+	font-size: 30px;
+}
+input{
+	text-align: center;
+}
+.mssg{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+	</style>
+</body>
+</html>
